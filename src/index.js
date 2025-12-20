@@ -1,6 +1,11 @@
-import "./style.css";
+// index.js
+import './style.css';
 
-const x=5;
-const y=6;
-const z=x+y;
-console.log(z);
+import { subscribe } from './state/state';
+import { renderUI } from './ui/ui';
+import { setupEvents } from './events/event';
+
+renderUI();                // initial render
+subscribe(renderUI);       // re-render on state changes
+setupEvents();             // attach event listeners
+

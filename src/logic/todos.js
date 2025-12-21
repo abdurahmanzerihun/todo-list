@@ -1,6 +1,6 @@
 import { setState } from '../state/state';
 
-export function createTodo(title) {
+export function createTodo(title,priority,dueDate,description) {
   setState(state => {
     const project = state.projects.find(
       p => p.id === state.activeProjectId
@@ -15,6 +15,9 @@ export function createTodo(title) {
     item.todos.push({
       id: crypto.randomUUID(),
       title,
+      priority,
+      dueDate,
+      description,
       completed: false
     });
   });

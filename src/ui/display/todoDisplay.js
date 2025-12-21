@@ -14,12 +14,21 @@ export function renderTodos(state) {
   if (!item) return;
 
   item.todos.forEach(todo => {
-    const li = document.createElement('li');
-    li.textContent = todo.title;
-    li.dataset.id = todo.id;
+    const todoLi1 = document.createElement('li');
+    todoLi1.textContent = todo.title;
+    todoLi1.dataset.id = todo.id;
+    const todoLi2=document.createElement('li');
+    todoLi2.textContent=todo.priority;
+    const todoLi3=document.createElement('li');
+    todoLi3.textContent=todo.dueDate;
+    const todoLi4=document.createElement('li');
+    todoLi4.textContent=todo.description;
 
     if (todo.completed) li.classList.add('done');
 
-    list.appendChild(li);
+    list.appendChild(todoLi1);
+    list.appendChild(todoLi2);
+    list.appendChild(todoLi3);
+    list.appendChild(todoLi4);
   });
 }

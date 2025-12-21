@@ -4,9 +4,15 @@ export function setupProjectListeners(){
 const projForm=document.getElementById('proj-form');
 projForm.addEventListener('submit', (e) => {
  e.preventDefault();
-    const projInput=document.getElementById('proj-input')
-    const value = projInput.value; // string;
-    createProject(value);
-    projInput.value = '';
+    const projTitle=document.getElementById('proj-title')
+    const projPriority=document.getElementById('proj-priority')
+    const projDescription=document.getElementById('proj-description') // string;
+    createProject(projTitle.value,projPriority.value,projDescription.value);
+
+    projTitle.value='';
+    projPriority.value='';
+    projDescription.value='';
+    
+    
 });
 }

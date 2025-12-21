@@ -1,10 +1,12 @@
 import { setState } from '../state/state';
 
-export function createProject(name) {
+export function createProject(name,priority,description) {
   setState(state => {
     const project = {
       id: crypto.randomUUID(),
       name,
+      priority,
+      description,
       items: []
     };
 

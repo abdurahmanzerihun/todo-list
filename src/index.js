@@ -1,4 +1,3 @@
-// index.js
 import './style.css';
 
 import { subscribe } from './state/state';

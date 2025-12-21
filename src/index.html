@@ -8,7 +8,13 @@
 <body>
       <h1>The todo app</h1>
       <form action="" id="proj-form">
-            <input type="text" id="proj-input" placeholder="New project">
+            <input type="text" id="proj-title" placeholder="Project title">
+            <select name="priorityid" id="proj-priority">
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+            </select>
+            <textarea type="text" id="proj-description"></textarea>
             <button id="add-proj">Add project</button>
       </form> 
       <form id="item-form">
@@ -16,7 +22,14 @@
    <button id="add-item">Add item</button>
 </form>
  <form id="todo-form">
-  <input id="todo-input" placeholder="New todo" />
+  <input id="todo-title" placeholder="New todo" />
+ <select name="" id="todo-priority">
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+ </select>
+ <input type="date" name="" id="due-date">
+ <textarea id="todo-description"></textarea>
    <button id="add-todo">Add todo</button>
 </form>
 <ul id="project-list"></ul>

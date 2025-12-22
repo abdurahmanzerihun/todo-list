@@ -4,6 +4,6 @@ import { setupTodoListeners } from './todoListener';
 
 export function setupEvents() {
   setupProjectListeners();
-  setupItemListeners();
-  setupTodoListeners();
+ // setupItemListeners();
+ // setupTodoListeners();
 }

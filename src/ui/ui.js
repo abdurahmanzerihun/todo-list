@@ -7,6 +7,6 @@ import { getState } from '../state/state';
 export function renderUI() {
   const state = getState();
   renderProjects(state);
-  renderItems(state);
-  renderTodos(state);
+ // renderItems(state);
+  //renderTodos(state);
 }

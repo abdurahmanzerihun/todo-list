@@ -1,3 +1,128 @@
-h1{
-        color: green;
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f7f7f7;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid #ddd;
+  padding: 16px;
+}
+
+.sidebar-title {
+  margin-bottom: 12px;
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.project-list li {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.project-list li.active {
+  background: #e8f0ff;
+  font-weight: 600;
+}
+
+.project-list li:hover {
+  background: #f0f0f0;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.content-header {
+  margin-bottom: 16px;
+}
+
+/* Sections */
+.section {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  margin: 0;
+}
+
+/* Todos */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.todo.completed .todo-title {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Buttons */
+.primary-btn,
+.secondary-btn,
+.add-todo-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: #3b82f6;
+  color: white;
+  width: 100%;
+}
+
+.secondary-btn {
+  background: #e5e7eb;
+}
+
+.add-todo-btn {
+  background: transparent;
+  color: #3b82f6;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.add-todo-btn:hover {
+  opacity: 0.9;
 }

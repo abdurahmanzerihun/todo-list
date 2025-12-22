@@ -6,8 +6,54 @@
         <title>Todo App</title>
 </head>
 <body>
-      <h1>The todo app</h1>
-      <form action="" id="proj-form">
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="sidebar-title">Projects</h2>
+
+      <ul id="project-list" class="project-list">
+        <!-- projects rendered here -->
+      </ul>
+
+      <button id="add-project-btn" class="primary-btn" type="button">
+        + Add Project
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <header class="content-header">
+        <h2 id="active-project-title">Select a project</h2>
+      </header>
+
+      <!-- Sections -->
+      <div id="section-container" class="sections">
+        <!-- section rendered here -->
+        <!-- Example section -->
+        <!--
+        <section class="section">
+          <div class="section-header">
+            <h3 class="section-title">Today</h3>
+            <button class="add-todo-btn">+ Todo</button>
+          </div>
+
+          <ul class="todo-list">
+            <li class="todo">
+              <input type="checkbox" />
+              <span class="todo-title">Finish report</span>
+            </li>
+          </ul>
+        </section>
+        -->
+      </div>
+
+      <button id="add-section-btn" class="secondary-btn">
+        + Add Section
+      </button>
+    </main>
+  </div>
+  <dialog id="proj-dialog">
+         <form action="" id="proj-form">
             <input type="text" id="proj-title" placeholder="Project title">
             <select name="priorityid" id="proj-priority">
                   <option value="high">High</option>
@@ -16,12 +62,16 @@
             </select>
             <textarea type="text" id="proj-description"></textarea>
             <button id="add-proj">Add project</button>
-      </form> 
-      <form id="item-form">
+      </form>    
+      </dialog>
+      <dialog id="item-dialog">
+               <form id="item-form">
   <input id="item-input" placeholder="New item" />
    <button id="add-item">Add item</button>
 </form>
- <form id="todo-form">
+      </dialog>
+   <dialog id="todo-dialog">
+      <form id="todo-form">
   <input id="todo-title" placeholder="New todo" />
  <select name="" id="todo-priority">
       <option value="high">High</option>
@@ -32,9 +82,8 @@
  <textarea id="todo-description"></textarea>
    <button id="add-todo">Add todo</button>
 </form>
-<ul id="project-list"></ul>
-<ul id="item-list"></ul>
-<ul id="todo-list"></ul>
-
+   </dialog>
+ 
 </body>
+
 </html>

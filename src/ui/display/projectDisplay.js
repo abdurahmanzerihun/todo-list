@@ -62,18 +62,34 @@ export function renderActiveProject(state) {
   `;
 
   // Edit button
+  let currentEditProjectId = null;
+
   const editBtn = document.createElement('button');
   editBtn.textContent = 'Edit Project';
   editBtn.className = 'edit-project-btn';
+   const updateDialog=document.getElementById('update-dialog');
+    const updateForm=document.getElementById('update-form');
   editBtn.addEventListener('click', () => {
-    const projDialog=document.getElementById('proj-dialog');
-    document.getElementById('proj-title').value = project.name;
-  document.getElementById('proj-priority').value = project.priority;
-  document.getElementById('proj-description').value = project.description;
-projDialog.showModal();
+   
+    currentEditProjectId=project.id;
+    document.getElementById('update-title').value = project.name;
+  document.getElementById('update-priority').value = project.priority;
+  document.getElementById('update-desc').value = project.description;
+  
+updateDialog.showModal();
 
   });
+ 
+updateForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const newName=document.getElementById('update-title').value;
+  const newPriority=document.getElementById('update-priority').value;
+  const newDesc=document.getElementById('update-desc').value;
+  if (!currentEditProjectId) return;
 
+  updateProject(currentEditProjectId, newName,newPriority , newDesc);
+  updateDialog.close();
+})
 
   detailDiv.appendChild(editBtn);
   container.appendChild(detailDiv);

@@ -23,6 +23,7 @@ projForm.addEventListener('submit', (e) => {
     projTitle.value='';
     projPriority.value='';
     projDescription.value='';
+     dialog.close();
     
     
 });

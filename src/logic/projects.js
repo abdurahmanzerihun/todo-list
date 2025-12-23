@@ -16,11 +16,13 @@ export function createProject(name,priority,description) {
   });
 }
 
-export function updateProject(id, name) {
+export function updateProject(id, name,priority,description) {
   setState(state => {
     const project = state.projects.find(p => p.id === id);
     if (!project) return;
     project.name = name;
+    project.priority=priority;
+    project.description=description;
   });
 }
 

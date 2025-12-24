@@ -1,34 +1,34 @@
-export function renderTodos(state) {
-  const project = state.projects.find(
-    p => p.id === state.activeProjectId
-  );
-  if (!project) return;
+// display/todoDisplay.js
+import { deleteTodo, toggleTodo } from '../../logic/todos';
 
-  const item = project.items.find(
-    i => i.id === state.activeItemId
-  );
-
-  const list = document.querySelector('#todo-list');
-  list.innerHTML = '';
-
-  if (!item) return;
+export function renderTodos(item, container) {
+  container.innerHTML = '';
 
   item.todos.forEach(todo => {
-    const todoLi1 = document.createElement('li');
-    todoLi1.textContent = todo.title;
-    todoLi1.dataset.id = todo.id;
-    const todoLi2=document.createElement('li');
-    todoLi2.textContent=todo.priority;
-    const todoLi3=document.createElement('li');
-    todoLi3.textContent=todo.dueDate;
-    const todoLi4=document.createElement('li');
-    todoLi4.textContent=todo.description;
+    const li = document.createElement('li');
+    li.className = 'todo';
 
-    if (todo.completed) li.classList.add('done');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = todo.completed;
+    checkbox.addEventListener('change', () => {
+      toggleTodo(item.id, todo.id);
+    });
 
-    list.appendChild(todoLi1);
-    list.appendChild(todoLi2);
-    list.appendChild(todoLi3);
-    list.appendChild(todoLi4);
+    const title = document.createElement('span');
+    title.className = 'todo-title';
+    title.textContent = todo.title;
+
+    const meta = document.createElement('small');
+    meta.textContent = `${todo.priority} · ${todo.dueDate ?? 'No date'}`;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '✕';
+    deleteBtn.addEventListener('click', () => {
+      deleteTodo(item.id, todo.id);
+    });
+
+    li.append(checkbox, title, meta, deleteBtn);
+    container.appendChild(li);
   });
 }

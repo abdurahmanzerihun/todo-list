@@ -2,7 +2,9 @@
 import { renderTodos } from './todoDisplay';
 import { createTodo } from '../../logic/todos';
 import { updateProject } from '../../logic/projects';
+import { deleteItem,updateItem } from '../../logic/items';
 let currentEditProjectId = null; // keep outside renderItems to persist
+let currentEditItemId=null;
 
 export function renderItems(state) {
   const container = document.getElementById('section-container');
@@ -27,7 +29,7 @@ export function renderItems(state) {
     <p><strong>Priority:</strong> ${project.priority}</p>
   `;
 
-  // Edit button
+  // Edit project button
   const editBtn = document.createElement('button');
   editBtn.textContent = 'Edit Project';
   editBtn.className = 'edit-project-btn';
@@ -41,10 +43,8 @@ export function renderItems(state) {
 
     updateDialog.showModal();
   });
-
   projectDetails.appendChild(editBtn);
-  container.appendChild(projectDetails);
-
+  container.appendChild(projectDetails); 
   // Render sections/items
   project.items.forEach(item => {
     const section = document.createElement('section');
@@ -62,12 +62,36 @@ export function renderItems(state) {
     addTodoBtn.className = 'add-todo-btn';
     addTodoBtn.textContent = '+ Todo';
 
+//Edit item button
+    const editItemBtn = document.createElement('button');
+  editItemBtn.textContent = 'Edit Item';
+  editItemBtn.className = 'edit-item-btn';
+
+  const updateItemDialog = document.getElementById('update-item-dialog');
+  editItemBtn .addEventListener('click', () => {
+    currentEditItemId = item.id;
+    document.getElementById('update-item-input').value = item.name;
+   updateItemDialog.showModal();
+  });
+
+    //Delete items
+
+     const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '✕';
+        deleteBtn.className = 'delete-btn';
+    
+        deleteBtn.addEventListener('click', (e) => {
+    
+          e.stopPropagation();
+          deleteItem(item.id);
+        });
+
     // Create todo in this item
     addTodoBtn.addEventListener('click', () => {
       createTodo(item.id, 'New Todo', 'medium', null, '');
     });
 
-    header.append(title, addTodoBtn);
+    header.append(title, deleteBtn,editItemBtn,addTodoBtn);
 
     // Todo list container
     const todoList = document.createElement('ul');
@@ -81,7 +105,22 @@ export function renderItems(state) {
   });
 }
 
-// Attach update form listener once, outside renderItems
+// Outside renderItems
+
+//update item form listener 
+const updateItemForm=document.getElementById('update-item-form');
+const updateItemDialog=document.getElementById('update-item-dialog');
+updateItemForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+   const newItemName = document.getElementById('update-item-input').value;
+  if (!currentEditItemId) return;
+
+  updateItem(currentEditItemId, newItemName);
+  updateItemDialog.close();
+
+})
+
+//update project form listener
 const updateForm = document.getElementById('update-form');
 const updateDialog = document.getElementById('update-dialog');
 

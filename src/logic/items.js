@@ -17,6 +17,15 @@ export function createItem(name) {
     state.activeItemId = item.id;
   });
 }
+export function updateItem(itemId,newName){
+setState(state=>{
+  const project = state.projects.find(p => p.id === state.activeProjectId);
+    if (!project) return;
+     const item = project.items.find(i => i.id === itemId);
+    if (!item) return;
+      item.name=newName;
+});
+}
 
 export function deleteItem(itemId) {
   setState(state => {

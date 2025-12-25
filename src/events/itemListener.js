@@ -10,5 +10,6 @@ itemForm.addEventListener('submit', (e) => {
     const itemInput=document.getElementById('item-input')
     createItem(itemInput.value);
     itemInput.value = '';
+    itemDialog.close();
 });
 }

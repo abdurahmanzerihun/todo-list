@@ -20,7 +20,7 @@ export function renderTodos(item, container) {
     title.textContent = todo.title;
 
     const meta = document.createElement('small');
-    meta.textContent = `${todo.priority} · ${todo.dueDate ?? 'No date'}`;
+    meta.textContent = `${todo.priority} · ${todo.dueDate ?? 'No date'} ${todo.description}`;
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = '✕';

@@ -1,10 +1,12 @@
 // itemDisplay.js
 import { renderTodos } from './todoDisplay';
-import { createTodo } from '../../logic/todos';
 import { updateProject } from '../../logic/projects';
 import { deleteItem,updateItem } from '../../logic/items';
+import { createTodo } from '../../logic/todos';
+import { getState } from '../../state/state';
 let currentEditProjectId = null; // keep outside renderItems to persist
 let currentEditItemId=null;
+let currentCreateTodoId=null;
 
 export function renderItems(state) {
   const container = document.getElementById('section-container');
@@ -87,10 +89,13 @@ export function renderItems(state) {
         });
 
     // Create todo in this item
-    addTodoBtn.addEventListener('click', () => {
-      createTodo(item.id, 'New Todo', 'medium', null, '');
-    });
+const todoDialog=document.getElementById('todo-dialog');
+    addTodoBtn.addEventListener('click',()=>{
+      currentCreateTodoId=item.id;
+todoDialog.showModal();
 
+    })
+  
     header.append(title, deleteBtn,editItemBtn,addTodoBtn);
 
     // Todo list container
@@ -106,6 +111,23 @@ export function renderItems(state) {
 }
 
 // Outside renderItems
+
+//Create todos form
+const todoForm=document.getElementById('todo-form');
+todoForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const todoTitle=document.getElementById('todo-title');
+  const todoPriority=document.getElementById('todo-priority');
+  const todoDueDate=document.getElementById('due-date');
+  const todoDesc=document.getElementById('todo-description');
+  createTodo(currentCreateTodoId,todoTitle.value,todoPriority.value,todoDueDate.value,todoDesc.value);
+  todoDesc.value='';
+  todoDueDate.value='';
+  todoPriority.value='';
+  todoTitle.value=''
+  document.getElementById('todo-dialog').close();
+   renderItems(getState()); 
+})
 
 //update item form listener 
 const updateItemForm=document.getElementById('update-item-form');

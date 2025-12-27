@@ -26,10 +26,27 @@ export function renderItems(state) {
   // Render project properties in main content
   const projectDetails = document.createElement('div');
   projectDetails.className = 'project-detail';
-  projectDetails.innerHTML = `
-    <p><strong>Description:</strong> ${project.description || 'No description'}</p>
-    <p><strong>Priority:</strong> ${project.priority}</p>
-  `;
+ projectDetails.innerHTML = `
+  <div class="project-meta">
+    <div class="project-row">
+      <span class="label">Description</span>
+      <span class="value">${project.description || 'No description'}</span>
+    </div>
+
+    <div class="project-row">
+      <span class="label">Priority</span>
+      <span class="value priority">${project.priority}</span>
+    </div>
+
+    <div class="project-row">
+      <span class="label">Created</span>
+      <span class="value">
+        ${new Date(project.createdAt).toLocaleDateString()}
+      </span>
+    </div>
+  </div>
+`;
+
 
   // Edit project button
   const editBtn = document.createElement('button');
@@ -46,7 +63,7 @@ export function renderItems(state) {
     updateDialog.showModal();
   });
   projectDetails.appendChild(editBtn);
-  container.appendChild(projectDetails); 
+  container.appendChild(projectDetails); //project details container ends here 
   // Render sections/items
   project.items.forEach(item => {
     const section = document.createElement('section');
@@ -59,6 +76,8 @@ export function renderItems(state) {
     const title = document.createElement('h3');
     title.className = 'section-title';
     title.textContent = item.name;
+    const meta=document.createElement('small');
+    meta.textContent=`Created At: ${item.createdAt}`
 
     const addTodoBtn = document.createElement('button');
     addTodoBtn.className = 'add-todo-btn';
@@ -95,8 +114,17 @@ const todoDialog=document.getElementById('todo-dialog');
 todoDialog.showModal();
 
     })
-  
-    header.append(title, deleteBtn,editItemBtn,addTodoBtn);
+  //appending section elements 
+   const headerLeft = document.createElement('div');
+headerLeft.className = 'section-header-left';
+headerLeft.append(title, meta);
+
+const headerRight = document.createElement('div');
+headerRight.className = 'section-header-actions';
+headerRight.append(deleteBtn, editItemBtn, addTodoBtn);
+
+header.append(headerLeft, headerRight);
+
 
     // Todo list container
     const todoList = document.createElement('ul');

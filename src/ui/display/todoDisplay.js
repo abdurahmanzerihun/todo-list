@@ -1,7 +1,10 @@
 // display/todoDisplay.js
-import { deleteTodo, toggleTodo } from '../../logic/todos';
+import { updateTodo,deleteTodo, toggleTodo } from '../../logic/todos';
+let currentEditTodoId=null;
+let currentEditItemId=null;
 
 export function renderTodos(item, container) {
+ 
   container.innerHTML = '';
 
   item.todos.forEach(todo => {
@@ -20,15 +23,71 @@ export function renderTodos(item, container) {
     title.textContent = todo.title;
 
     const meta = document.createElement('small');
-    meta.textContent = `${todo.priority} · ${todo.dueDate ?? 'No date'} ${todo.description}`;
+    meta.className = 'todo-meta';
 
+    meta.textContent = [
+  todo.priority,
+  todo.dueDate ?? 'No date',
+  todo.description,
+  todo.createdAt
+    ? new Date(todo.createdAt).toLocaleDateString()
+    : null
+].filter(Boolean).join(' · ');
+
+  
+    //Edit todos
+  const editTodoBtn=document.createElement('button');
+  
+  editTodoBtn.className='edit-todo-btn';
+  editTodoBtn.textContent="Edit todo";
+  const updateTodoDialog=document.getElementById('update-todo-dialog');
+  const closeDialog=document.getElementById('close-btn');
+  closeDialog.addEventListener('click',()=>updateTodoDialog.close())
+  editTodoBtn.addEventListener('click',()=>{
+    currentEditItemId=item.id;
+    currentEditTodoId=todo.id;
+    
+    document.getElementById('update-todo-title').value = todo.title;
+    document.getElementById('update-todo-priority').value=todo.priority;
+    document.getElementById('update-due-date').value=todo.dueDate;
+    document.getElementById('update-todo-desc').value=todo.description;
+    updateTodoDialog.showModal();
+  })
+  
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = '✕';
     deleteBtn.addEventListener('click', () => {
       deleteTodo(item.id, todo.id);
     });
+//Appending todo-list elements 
+    const content = document.createElement('div');
+content.className = 'todo-content';
 
-    li.append(checkbox, title, meta, deleteBtn);
+const textBlock = document.createElement('div');
+textBlock.className = 'todo-text';
+
+textBlock.append(title, meta);
+
+const actions = document.createElement('div');
+actions.className = 'todo-actions';
+actions.append(editTodoBtn, deleteBtn);
+
+content.append(textBlock, actions);
+li.append(checkbox, content);
+
     container.appendChild(li);
   });
+ 
 }
+
+ const updateTodoForm=document.getElementById('update-todo-form');
+updateTodoForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const newTitle=document.getElementById('update-todo-title').value;
+  const newPriority=document.getElementById('update-todo-priority').value;
+  const newDueDate=document.getElementById('update-due-date').value;
+  const newDesc=document.getElementById('update-todo-desc').value;
+  updateTodo(currentEditItemId,currentEditTodoId,newTitle,newPriority,newDueDate,newDesc);
+  document.getElementById('update-todo-dialog').close();
+})
+

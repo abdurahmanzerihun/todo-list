@@ -9,6 +9,11 @@ export function createItem(name) {
 
     const item = {
       id: crypto.randomUUID(),
+      createdAt:new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+       }),
       name,
       todos: []
     };

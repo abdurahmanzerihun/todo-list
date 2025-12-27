@@ -4,6 +4,11 @@ export function createProject(name,priority,description) {
   setState(state => {
     const project = {
       id: crypto.randomUUID(),
+      createdAt:new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+       }),
       name,
       priority,
       description,

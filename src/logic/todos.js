@@ -13,6 +13,11 @@ export function createTodo(itemId, title, priority, dueDate, description) {
 
     item.todos.push({
       id: crypto.randomUUID(),
+      createdAt:new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+       }),
       title,
       priority,
       dueDate,
@@ -51,7 +56,7 @@ export function deleteTodo(itemId, todoId) {
   });
 }
 
-export function updateTodo(itemId, todoId, newTitle) {
+export function updateTodo(itemId, todoId, newTitle,newPriority,newDueDate,newDesc) {
   setState(state => {
     const project = state.projects.find(
       p => p.id === state.activeProjectId
@@ -65,5 +70,8 @@ export function updateTodo(itemId, todoId, newTitle) {
     if (!todo) return;
 
     todo.title = newTitle;
+    todo.priority=newPriority;
+    todo.dueDate=newDueDate;
+    todo.description=newDesc;
   });
 }

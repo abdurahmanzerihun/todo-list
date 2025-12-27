@@ -103,7 +103,20 @@
    <button id="update-add-item">Update item</button>
 </form>
       </dialog>
- 
+      <!--update todo form-->
+<dialog id="update-todo-dialog">
+  <button id="close-btn">Close</button>
+      <form id="update-todo-form">
+  <input id="update-todo-title" placeholder="New todo" />
+ <select name="" id="update-todo-priority">
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+ </select>
+ <input type="date" name="" id="update-due-date">
+ <textarea id="update-todo-desc"></textarea>
+   <button id="update-todo">Update todo</button>
+</form>
+   </dialog>
 </body>
-
 </html>

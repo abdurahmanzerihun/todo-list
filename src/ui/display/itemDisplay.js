@@ -99,7 +99,7 @@ export function renderItems(state) {
 
      const deleteBtn = document.createElement('button');
         deleteBtn.textContent = '✕';
-        deleteBtn.className = 'delete-btn';
+        deleteBtn.className = 'item-delete-btn';
     
         deleteBtn.addEventListener('click', (e) => {
     

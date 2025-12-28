@@ -13,11 +13,6 @@ export function createTodo(itemId, title, priority, dueDate, description) {
 
     item.todos.push({
       id: crypto.randomUUID(),
-      createdAt:new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-       }),
       title,
       priority,
       dueDate,

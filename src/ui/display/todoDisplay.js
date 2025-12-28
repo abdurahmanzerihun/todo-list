@@ -26,15 +26,11 @@ export function renderTodos(item, container) {
     meta.className = 'todo-meta';
 
     meta.textContent = [
-  todo.priority,
-  todo.dueDate ?? 'No date',
-  todo.description,
-  todo.createdAt
-    ? new Date(todo.createdAt).toLocaleDateString()
-    : null
+  `Priority: ${todo.priority}`,
+  `Due: ${todo.dueDate}` ?? 'No date',
+  todo.description ? `Note: ${todo.description}` : null,
 ].filter(Boolean).join(' · ');
 
-  
     //Edit todos
   const editTodoBtn=document.createElement('button');
   
@@ -53,14 +49,15 @@ export function renderTodos(item, container) {
     document.getElementById('update-todo-desc').value=todo.description;
     updateTodoDialog.showModal();
   })
-  
+  //Delete todos 
     const deleteBtn = document.createElement('button');
+    deleteBtn.className='delete-todo-btn';
     deleteBtn.textContent = '✕';
     deleteBtn.addEventListener('click', () => {
       deleteTodo(item.id, todo.id);
     });
 //Appending todo-list elements 
-    const content = document.createElement('div');
+const content = document.createElement('div');
 content.className = 'todo-content';
 
 const textBlock = document.createElement('div');

@@ -14,27 +14,49 @@ body {
 }
 
 /* Sidebar */
+
 .sidebar {
   width: 260px;
   background: #ffffff;
   border-right: 1px solid #ddd;
   padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
+
 
 .sidebar-title {
   margin-bottom: 12px;
 }
-
+.project-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .project-list {
   list-style: none;
   padding: 0;
   margin: 0 0 16px 0;
+
+  overflow-y: auto;
+  flex: 1;
 }
+
 
 .project-list li {
   padding: 8px 10px;
   border-radius: 6px;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .project-list li.active {
@@ -45,12 +67,18 @@ body {
 .project-list li:hover {
   background: #f0f0f0;
 }
-
+.delete-btn{
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: white;
+  cursor: pointer;  
+}
 /* Content */
 .content {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;
+  overflow-y: auto; 
 }
 
 .content-header {
@@ -218,6 +246,21 @@ body {
   display: flex;
   gap: 0.4rem;
 }
+.edit-item-btn,.item-delete-btn{
+margin-top: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: white;
+  cursor: pointer;  
+}
+.edit-item-btn:hover{
+background: #f3f4f6;
+}
+.item-delete-btn:hover{
+  background: #f3f4f6;
+}
 /* todo-list section */
 .todo {
   display: flex;
@@ -261,7 +304,7 @@ body {
 }
 
 .edit-todo-btn,
-.todo-actions button {
+.todo-actions .delete-todo-btn{
   font-size: 0.7rem;
   padding: 0.25rem 0.5rem;
   border-radius: 5px;

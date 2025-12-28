@@ -7,7 +7,8 @@ export function renderProjects(state) {
   state.projects.forEach(project => {
     const li = document.createElement('li');
     li.className = 'project-item';
-    li.textContent = project.name;
+    li.innerHTML = `<span class="project-name">${project.name}</span>`
+ 
 
     if (project.id === state.activeProjectId) {
       li.classList.add('active');

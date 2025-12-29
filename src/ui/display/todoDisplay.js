@@ -21,15 +21,24 @@ export function renderTodos(item, container) {
     const title = document.createElement('span');
     title.className = 'todo-title';
     title.textContent = todo.title;
+//todo prorperty rendering 
+   const meta = document.createElement('small');
+meta.className = 'todo-meta';
 
-    const meta = document.createElement('small');
-    meta.className = 'todo-meta';
+const priority = document.createElement('span');
+priority.textContent = `Priority: ${todo.priority}`;
 
-    meta.textContent = [
-  `Priority: ${todo.priority}`,
-  `Due: ${todo.dueDate}` ?? 'No date',
-  todo.description ? `Note: ${todo.description}` : null,
-].filter(Boolean).join(' · ');
+const due = document.createElement('span');
+due.textContent = `Due: ${todo.dueDate || 'No date'}`;
+
+meta.append(priority, ' · ', due);
+
+if (todo.description) {
+  const desc = document.createElement('span');
+  desc.className = 'todo-desc';
+  desc.textContent = `Note: ${todo.description}`;
+  meta.append(' · ', desc);
+}
 
     //Edit todos
   const editTodoBtn=document.createElement('button');

@@ -29,19 +29,19 @@ export function renderItems(state) {
  projectDetails.innerHTML = `
   <div class="project-meta">
     <div class="project-row">
-      <span class="label">Description</span>
+      <span class="label">Desc</span>
       <span class="value">${project.description || 'No description'}</span>
     </div>
 
     <div class="project-row">
       <span class="label">Priority</span>
-      <span class="value priority">${project.priority}</span>
+      <span class="value priority">${project.priority ||'Normal'}</span>
     </div>
 
     <div class="project-row">
       <span class="label">Created</span>
       <span class="value">
-        ${new Date(project.createdAt).toLocaleDateString()}
+        ${project.createdAt}
       </span>
     </div>
   </div>
@@ -52,8 +52,10 @@ export function renderItems(state) {
   const editBtn = document.createElement('button');
   editBtn.textContent = 'Edit Project';
   editBtn.className = 'edit-project-btn';
-
+//close update-proj modal
   const updateDialog = document.getElementById('update-dialog');
+  const closeModal=document.getElementById('close-update-proj-btn');
+  closeModal.addEventListener('click',()=>updateDialog.close());
   editBtn.addEventListener('click', () => {
     currentEditProjectId = project.id;
     document.getElementById('update-title').value = project.name;
@@ -89,6 +91,9 @@ export function renderItems(state) {
   editItemBtn.className = 'edit-item-btn';
 
   const updateItemDialog = document.getElementById('update-item-dialog');
+  // close update-item dialog
+  const closeItemUpdateModal=document.getElementById('close-update-item-btn');
+  closeItemUpdateModal.addEventListener('click',()=>updateItemDialog.close());
   editItemBtn .addEventListener('click', () => {
     currentEditItemId = item.id;
     document.getElementById('update-item-input').value = item.name;
@@ -104,11 +109,17 @@ export function renderItems(state) {
         deleteBtn.addEventListener('click', (e) => {
     
           e.stopPropagation();
+          const confirmed=confirm(`Are you sure you want delete "${item.name}" ?`)
+          if(!confirmed) return ;
           deleteItem(item.id);
         });
 
     // Create todo in this item
 const todoDialog=document.getElementById('todo-dialog');
+
+//Close add-todo dialog
+const closeAddTodoDialog=document.getElementById('close-add-todo-btn');
+closeAddTodoDialog.addEventListener('click',()=>todoDialog.close());
     addTodoBtn.addEventListener('click',()=>{
       currentCreateTodoId=item.id;
 todoDialog.showModal();

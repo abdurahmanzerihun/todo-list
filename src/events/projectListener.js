@@ -3,7 +3,10 @@ import { createProject } from '../logic/projects';
 export function setupProjectListeners(){
      const addProjectBtn = document.getElementById('add-project-btn');
   const dialog = document.getElementById('proj-dialog');
+//close modal
 
+const closeProjDialog=document.getElementById('close-add-proj-btn');
+closeProjDialog.addEventListener('click',()=>dialog.close());
   if (!addProjectBtn || !dialog) {
     console.error('Project button or dialog not found');
     return;

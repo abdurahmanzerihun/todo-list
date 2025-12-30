@@ -29,6 +29,12 @@ export function renderProjects(state) {
     deleteBtn.addEventListener('click', (e) => {
 
       e.stopPropagation();
+      const confirmed = confirm(
+    `Are you sure you want to delete "${project.name}"?`
+  );
+
+  if (!confirmed) return;
+      
       deleteProject(project.id);
     });
 

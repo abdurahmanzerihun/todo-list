@@ -26,7 +26,7 @@ export function renderTodos(item, container) {
 meta.className = 'todo-meta';
 
 const priority = document.createElement('span');
-priority.textContent = `Priority: ${todo.priority}`;
+priority.textContent = `Priority: ${todo.priority || 'Normal'}`;
 
 const due = document.createElement('span');
 due.textContent = `Due: ${todo.dueDate || 'No date'}`;
@@ -46,8 +46,9 @@ if (todo.description) {
   editTodoBtn.className='edit-todo-btn';
   editTodoBtn.textContent="Edit todo";
   const updateTodoDialog=document.getElementById('update-todo-dialog');
+  //Close update dialog
   const closeDialog=document.getElementById('close-btn');
-  closeDialog.addEventListener('click',()=>updateTodoDialog.close())
+  closeDialog.addEventListener('click',()=>updateTodoDialog.close());
   editTodoBtn.addEventListener('click',()=>{
     currentEditItemId=item.id;
     currentEditTodoId=todo.id;
@@ -63,6 +64,8 @@ if (todo.description) {
     deleteBtn.className='delete-todo-btn';
     deleteBtn.textContent = '✕';
     deleteBtn.addEventListener('click', () => {
+      const confirmed =confirm(`Are you sure you want to delete "${todo.title}"?`)
+      if(!confirmed) return;
       deleteTodo(item.id, todo.id);
     });
 //Appending todo-list elements 

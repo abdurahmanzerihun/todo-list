@@ -9,6 +9,7 @@ let currentEditItemId=null;
 let currentCreateTodoId=null;
 
 export function renderItems(state) {
+
   const container = document.getElementById('section-container');
   container.innerHTML = '';
 
@@ -79,6 +80,7 @@ export function renderItems(state) {
     title.className = 'section-title';
     title.textContent = item.name;
     const meta=document.createElement('small');
+
     meta.textContent=`Created At: ${item.createdAt}`
 
     const addTodoBtn = document.createElement('button');
@@ -89,7 +91,6 @@ export function renderItems(state) {
     const editItemBtn = document.createElement('button');
   editItemBtn.textContent = 'Edit Item';
   editItemBtn.className = 'edit-item-btn';
-
   const updateItemDialog = document.getElementById('update-item-dialog');
   // close update-item dialog
   const closeItemUpdateModal=document.getElementById('close-update-item-btn');
@@ -136,8 +137,7 @@ headerRight.append(deleteBtn, editItemBtn, addTodoBtn);
 
 header.append(headerLeft, headerRight);
 
-
-    // Todo list container
+// Todo list container
     const todoList = document.createElement('ul');
     todoList.className = 'todo-list';
 
@@ -196,4 +196,14 @@ updateForm.addEventListener('submit', (e) => {
 
   updateProject(currentEditProjectId, newName, newPriority, newDesc);
   updateDialog.close();
+});
+
+//Menu toggle 
+
+  const sidebar = document.querySelector('.sidebar');
+const menuBtn = document.getElementById('menu-btn');
+
+menuBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+   menuBtn.textContent = sidebar.classList.contains('open') ? '✕' : '☰';
 });

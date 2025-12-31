@@ -1,4 +1,5 @@
 import { setState } from '../state/state';
+import { v4 as uuidv4 } from 'uuid';
 
 export function createItem(name) {
   setState(state => {
@@ -8,7 +9,7 @@ export function createItem(name) {
     if (!project) return;
 
     const item = {
-      id: crypto.randomUUID(),
+      id: uuidv4(),
       createdAt:new Date().toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',

@@ -434,12 +434,159 @@ dialog > button {
 dialog > button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
-
-/* Mobile spacing */
-@media (max-width: 480px) {
-  dialog {
-    width: 95vw;
-  }
+/* toggle button */
+#menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
 }
 
+
+   /*Mobile layout*/
+@media (max-width: 768px) {
+
+  /* Main app container */
+  body > div {
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  /* Sidebar becomes overlay */
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 80%;
+    max-width: 300px;
+    z-index: 1000;
+    background: #ffffff;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+  }
+
+  /* Sidebar open state */
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Content takes full width */
+  .content {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  /* Project list spacing */
+  .project-list li {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  /* Project detail grid → stacked */
+  .project-row {
+    grid-template-columns: 1fr;
+    row-gap: 0.25rem;
+  }
+
+  .project-row .label {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  /* SECTION CONTAINER */
+  .section {
+    margin-bottom: 1.25rem;
+    border-radius: 12px;
+  }
+
+  /* SECTION HEADER */
+   .section-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+  /* Title + meta */
+  .section-header-left {
+    gap: 0.25rem;
+  }
+  /* Actions row moves below */
+  .section-header-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+.section-header-actions button {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.75rem;
+  }
+  /* Add button: easier to tap */
+  .add-todo-btn {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+  }
+
+  /* TODO LIST */
+  .todo-list {
+    padding: 0.25rem 1rem 0.75rem;
+  }
+
+  /* TODO ITEM */
+  .todo {
+    padding: 0.75rem 0;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  /* CHECKBOX spacing */
+  .todo input[type="checkbox"] {
+    margin-top: 2px;
+  }
+
+  /* TODO TITLE */
+  .todo-title {
+    font-size: 0.9rem;
+    line-height: 1.4;
+     white-space: normal;
+  }
+  .todo-meta {
+    font-size: 0.7rem;
+  }
+  .todo-desc {
+    white-space: normal; /* allow multiple lines */
+    overflow: visible;   /* show full text */
+    text-overflow: clip; /* remove ellipsis */
+    line-height: 1.3;
+  }
+
+  .todo-text {
+    flex-direction: column; /* stack title + description */
+    gap: 0.25rem;
+  }
+
+/* toggle button */
+
+  #menu-btn {
+    display: block;
+    margin-left: auto;
+  }
+
+  /* Buttons smaller */
+  .edit-todo-btn,
+  .delete-todo-btn {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.45rem;
+  }
+
+  /* Dialog spacing */
+  dialog form {
+    padding: 1.2rem;
+  }
+}
 

@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Todo App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
 </head>
 <body>
   <div class="app">
     <!-- Sidebar -->
     <aside class="sidebar">
       <h2 class="sidebar-title">Projects</h2>
-
+      <button class="add-project-btn" type="button">
+        <span class="icon">+</span>
+        Add Project
+      </button>
       <ul id="project-list" class="project-list">
         <!-- projects rendered here -->
       </ul>
-
-      <button id="add-project-btn" class="primary-btn" type="button">
-        + Add Project
-      </button>
     </aside>
+
     <!-- Main Content -->
     <main class="content">
-      <header class="content-header">
-        <h2 id="active-project-title">Select a project</h2>
+      <header class="content-header empty">
+        <button id="menu-btn">☰</button>
+        <h2 id="active-project-title">No project selected</h2> 
+        <div class="empty-header">
+          <p>Select a project or create a new one.</p> 
+          <button class="add-project-btn"><span class="icon">+</span> Add Project</button> 
+        </div>
       </header>
 
       <!-- Sections -->
       <div id="section-container" class="sections">
-        <!-- section rendered here -->
-        <!-- Example section -->
-      
         <section class="section">
           <div class="section-header">
             <h3 class="section-title">Today</h3>
@@ -43,7 +45,6 @@
             </li>
           </ul>
         </section>
-        
       </div>
 
       <button id="add-item-btn" class="secondary-btn">
@@ -51,83 +52,119 @@
       </button>
     </main>
   </div>
+
+  <!-- Project Dialog -->
   <dialog id="proj-dialog">
     <button id="close-add-proj-btn">Close</button>
-         <form id="proj-form">
-            <input type="text" id="proj-title" placeholder="Project title" required maxlength="80">
-            <select name="priorityid" id="proj-priority">
-                  <option value="">Select Priority</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-            </select>
-            <textarea type="text" id="proj-description" placeholder="Description" ></textarea>
-            <button id="add-proj">Add project</button>
-      </form>    
-      </dialog>
-      <!-- Item dialog  -->
-      <dialog id="item-dialog">
-         <button id="close-add-item-btn">Close</button>
-               <form id="item-form">
-  <input id="item-input" placeholder="New item" maxlength="60" required />
-   <button id="add-item">Add item</button>
-</form>
-      </dialog>
+    <form id="proj-form">
+      <label for="proj-title">Project Title <span style="color:red">*</span></label>
+      <input type="text" id="proj-title" placeholder="Project title" required maxlength="80">
 
-      <!-- Todo dialog -->
-   <dialog id="todo-dialog">
-     <button id="close-add-todo-btn">Close</button>
-      <form id="todo-form">
-  <input id="todo-title" placeholder="New todo" maxlength="60" required/>
- <select name="" id="todo-priority">
-  <option value="">Select Priority</option>
-      <option value="high">High</option>
-      <option value="medium">Medium</option>
-      <option value="low">Low</option>
- </select>
- <input type="date" id="due-date">
- <textarea id="todo-description" maxlength="300"></textarea>
-   <button id="add-todo">Add todo</button>
-</form>
-   </dialog>
-<!--Update project form -->
-   <dialog id="update-dialog">
-     <button id="close-update-proj-btn">Close</button>
-<form id="update-form">
-<input type="text" id="update-title" placeholder="Project title" maxlength="80" required>
-            <select name="priorityid" id="update-priority">
-              <option value="">Select Priority</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-            </select>
-            <textarea type="text" id="update-desc" maxlength="300"></textarea>
-            <button id="update-proj">Update project</button>
-</form>
-   </dialog>
+      <label for="proj-priority">Priority</label>
+      <select name="priorityid" id="proj-priority">
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
 
-   <!--Update item form -->
+      <label for="proj-description">Description</label>
+      <textarea id="proj-description" placeholder="Description"></textarea>
+
+      <button id="add-proj">Add project</button>
+    </form>    
+  </dialog>
+
+  <!-- Item Dialog -->
+  <dialog id="item-dialog">
+    <button id="close-add-item-btn">Close</button>
+    <form id="item-form">
+      <label for="item-input">Item <span style="color:red">*</span></label>
+      <input id="item-input" placeholder="New item" maxlength="60" required />
+      <button id="add-item">Add item</button>
+    </form>
+  </dialog>
+
+  <!-- Todo Dialog -->
+  <dialog id="todo-dialog">
+    <button id="close-add-todo-btn">Close</button>
+    <form id="todo-form">
+      <label for="todo-title">Todo Title <span style="color:red">*</span></label>
+      <input id="todo-title" placeholder="New todo" maxlength="60" required/>
+
+      <label for="todo-priority">Priority</label>
+      <select id="todo-priority">
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <label for="due-date">Due Date</label>
+      <input type="date" id="due-date">
+
+      <label for="todo-description">Description</label>
+      <textarea id="todo-description" maxlength="300"></textarea>
+
+      <button id="add-todo">Add todo</button>
+    </form>
+  </dialog>
+
+  <!-- Update Project Dialog -->
+  <dialog id="update-dialog">
+    <button id="close-update-proj-btn">Close</button>
+    <form id="update-form">
+      <label for="update-title">Project Title <span style="color:red">*</span></label>
+      <input type="text" id="update-title" placeholder="Project title" maxlength="80" required>
+
+      <label for="update-priority">Priority</label>
+      <select id="update-priority">
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <label for="update-desc">Description</label>
+      <textarea id="update-desc" maxlength="300"></textarea>
+
+      <button id="update-proj">Update project</button>
+    </form>
+  </dialog>
+
+  <!-- Update Item Dialog -->
   <dialog id="update-item-dialog">
-     <button id="close-update-item-btn">Close</button>
-               <form id="update-item-form">
-  <input id="update-item-input" placeholder="New item" maxlength="60" required/>
-   <button id="update-add-item">Update item</button>
-</form>
-      </dialog>
-      <!--update todo form-->
-<dialog id="update-todo-dialog">
-  <button id="close-btn">Close</button>
-      <form id="update-todo-form">
-  <input id="update-todo-title" placeholder="New todo" maxlength="60" required />
- <select name="" id="update-todo-priority">
-      <option value="high">High</option>
-      <option value="medium">Medium</option>
-      <option value="low">Low</option>
- </select>
- <input type="date" name="" id="update-due-date">
- <textarea id="update-todo-desc" maxlength="300"></textarea>
-   <button id="update-todo">Update todo</button>
-</form>
-   </dialog>
+    <button id="close-update-item-btn">Close</button>
+    <form id="update-item-form">
+      <label for="update-item-input">Item <span style="color:red">*</span></label>
+      <input id="update-item-input" placeholder="New item" maxlength="60" required/>
+      <button id="update-add-item">Update item</button>
+    </form>
+  </dialog>
+
+  <!-- Update Todo Dialog -->
+  <dialog id="update-todo-dialog">
+    <button id="close-btn">Close</button>
+    <form id="update-todo-form">
+      <label for="update-todo-title">Todo Title <span style="color:red">*</span></label>
+      <input id="update-todo-title" placeholder="New todo" maxlength="60" required />
+
+      <label for="update-todo-priority">Priority</label>
+      <select id="update-todo-priority">
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <label for="update-due-date">Due Date</label>
+      <input type="date" id="update-due-date">
+
+      <label for="update-todo-desc">Description</label>
+      <textarea id="update-todo-desc" maxlength="300"></textarea>
+
+      <button id="update-todo">Update todo</button>
+    </form>
+  </dialog>
 </body>
 </html>

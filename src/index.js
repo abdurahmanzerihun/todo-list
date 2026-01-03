@@ -9,5 +9,5 @@ document.addEventListener('DOMContentLoaded',()=>{
 subscribe(renderUI);       // re-render on state changes
 setupEvents();        
 });
-            // attach event listeners
+          
 

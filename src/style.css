@@ -137,10 +137,49 @@ body {
 }
 
 .add-project-btn {
-  background: #3b82f6;
-  color: white;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  padding: 0.5rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  background: transparent;
+  color: #374151;
+
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: 
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
 }
+
+.add-project-btn:hover,
+.add-project-btn:focus-visible {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #111827;
+}
+.add-project-btn .icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #374151;
+}
+
 
 .secondary-btn {
   background: #e5e7eb;
@@ -291,7 +330,7 @@ background: #f3f4f6;
   min-width: 0;
 }
 
-/* text area (title + meta) */
+/* text area */
 .todo-text {
   display: flex;
   flex-direction: column;
@@ -299,7 +338,7 @@ background: #f3f4f6;
   min-width: 0;       
 }
 
-/* title (optional truncation) */
+/* title */
 .todo-title {
   overflow: hidden;
   font-size: 0.9rem;
@@ -316,7 +355,7 @@ background: #f3f4f6;
   min-width: 0;
 }
 
-/* ONLY description truncates */
+/* only description truncates */
 .todo-desc {
   min-width: 0;
   flex: 1;
@@ -545,7 +584,11 @@ dialog > button:hover {
     padding: 1rem;
     width: 100%;
   }
-
+  /* add project button on the sidebar */
+ .add-project-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.7rem;
+  }
   /* Project list spacing */
   .project-list {
     flex: 1;
@@ -556,8 +599,9 @@ dialog > button:hover {
     padding: 10px 12px;
     font-size: 0.95rem;
   }
+/* add project button */
 
-  /* Project detail grid → stacked */
+  /* Project detail */
   .project-row {
     grid-template-columns: 1fr;
     row-gap: 0.25rem;
@@ -568,13 +612,13 @@ dialog > button:hover {
     color: #6b7280;
   }
 
-  /* SECTION CONTAINER */
+  /* Section container */
   .section {
     margin-bottom: 1.25rem;
     border-radius: 12px;
   }
 
-  /* SECTION HEADER */
+  /* Section header */
    .section-header {
     flex-direction: column;
     align-items: stretch;
@@ -606,12 +650,12 @@ dialog > button:hover {
     border-radius: 8px;
   }
 
-  /* TODO LIST */
+  /* Todo list */
   .todo-list {
     padding: 0.25rem 1rem 0.75rem;
   }
 
-  /* TODO ITEM */
+  /* Todo item */
   .todo {
   background: #ffffff;
   border-radius: 10px;
@@ -620,12 +664,12 @@ dialog > button:hover {
 }
 
 
-  /* CHECKBOX spacing */
+  /* Checkbox spacing */
   .todo input[type="checkbox"] {
     margin-top: 2px;
   }
 
-  /* TODO TITLE */
+  /* Todo title */
  .todo-title {
   font-size: 0.95rem;
   font-weight: 600;

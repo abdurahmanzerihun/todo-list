@@ -6,7 +6,7 @@ export function subscribe(fn) {
 }
 
 function notify() {
-  subscribers.forEach(fn => fn());
+  subscribers.forEach(fn => fn(getState()));
 }
 
 

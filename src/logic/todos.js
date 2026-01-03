@@ -1,5 +1,5 @@
-// logic/todo.js
 import { setState } from '../state/state';
+import { v4 as uuidv4 } from 'uuid';
 
 export function createTodo(itemId, title, priority, dueDate, description) {
   setState(state => {
@@ -12,7 +12,7 @@ export function createTodo(itemId, title, priority, dueDate, description) {
     if (!item) return;
 
     item.todos.push({
-      id: crypto.randomUUID(),
+      id: uuidv4(),
       title,
       priority,
       dueDate,

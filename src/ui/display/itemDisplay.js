@@ -1,15 +1,14 @@
-// itemDisplay.js
 import { renderTodos } from './todoDisplay';
 import { updateProject } from '../../logic/projects';
-import { deleteItem,updateItem } from '../../logic/items';
+import { deleteItem, updateItem } from '../../logic/items';
 import { createTodo } from '../../logic/todos';
 import { getState } from '../../state/state';
-let currentEditProjectId = null; // keep outside renderItems to persist
-let currentEditItemId=null;
-let currentCreateTodoId=null;
+
+let currentEditProjectId = null;
+let currentEditItemId = null;
+let currentCreateTodoId = null;
 
 export function renderItems(state) {
-
   const container = document.getElementById('section-container');
   container.innerHTML = '';
 
@@ -27,36 +26,37 @@ export function renderItems(state) {
   // Render project properties in main content
   const projectDetails = document.createElement('div');
   projectDetails.className = 'project-detail';
- projectDetails.innerHTML = `
-  <div class="project-meta">
-    <div class="project-row">
-      <span class="label">Desc</span>
-      <span class="value">${project.description || 'No description'}</span>
-    </div>
+  projectDetails.innerHTML = `
+    <div class="project-meta">
+      <div class="project-row">
+        <span class="label">Desc</span>
+        <span class="value">${project.description || 'No description'}</span>
+      </div>
 
-    <div class="project-row">
-      <span class="label">Priority</span>
-      <span class="value priority">${project.priority ||'Normal'}</span>
-    </div>
+      <div class="project-row">
+        <span class="label">Priority</span>
+        <span class="value priority">${project.priority || 'Normal'}</span>
+      </div>
 
-    <div class="project-row">
-      <span class="label">Created</span>
-      <span class="value">
-        ${project.createdAt}
-      </span>
+      <div class="project-row">
+        <span class="label">Created</span>
+        <span class="value">
+          ${project.createdAt}
+        </span>
+      </div>
     </div>
-  </div>
-`;
-
+  `;
 
   // Edit project button
   const editBtn = document.createElement('button');
   editBtn.textContent = 'Edit Project';
   editBtn.className = 'edit-project-btn';
-//close update-proj modal
+
+  // close update-proj modal
   const updateDialog = document.getElementById('update-dialog');
-  const closeModal=document.getElementById('close-update-proj-btn');
-  closeModal.addEventListener('click',()=>updateDialog.close());
+  const closeModal = document.getElementById('close-update-proj-btn');
+  closeModal.addEventListener('click', () => updateDialog.close());
+
   editBtn.addEventListener('click', () => {
     currentEditProjectId = project.id;
     document.getElementById('update-title').value = project.name;
@@ -65,8 +65,10 @@ export function renderItems(state) {
 
     updateDialog.showModal();
   });
+
   projectDetails.appendChild(editBtn);
-  container.appendChild(projectDetails); //project details container ends here 
+  container.appendChild(projectDetails); // project details container ends here
+
   // Render sections/items
   project.items.forEach(item => {
     const section = document.createElement('section');
@@ -79,65 +81,74 @@ export function renderItems(state) {
     const title = document.createElement('h3');
     title.className = 'section-title';
     title.textContent = item.name;
-    const meta=document.createElement('small');
 
-    meta.textContent=`Created At: ${item.createdAt}`
+    const meta = document.createElement('small');
+    meta.textContent = `Created At: ${item.createdAt}`;
 
     const addTodoBtn = document.createElement('button');
     addTodoBtn.className = 'add-todo-btn';
     addTodoBtn.textContent = '+ Todo';
 
-//Edit item button
+    // Edit item button
     const editItemBtn = document.createElement('button');
-  editItemBtn.textContent = 'Edit Item';
-  editItemBtn.className = 'edit-item-btn';
-  const updateItemDialog = document.getElementById('update-item-dialog');
-  // close update-item dialog
-  const closeItemUpdateModal=document.getElementById('close-update-item-btn');
-  closeItemUpdateModal.addEventListener('click',()=>updateItemDialog.close());
-  editItemBtn .addEventListener('click', () => {
-    currentEditItemId = item.id;
-    document.getElementById('update-item-input').value = item.name;
-   updateItemDialog.showModal();
-  });
+    editItemBtn.textContent = 'Edit Item';
+    editItemBtn.className = 'edit-item-btn';
 
-    //Delete items
+    const updateItemDialog = document.getElementById('update-item-dialog');
 
-     const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = '✕';
-        deleteBtn.className = 'item-delete-btn';
-    
-        deleteBtn.addEventListener('click', (e) => {
-    
-          e.stopPropagation();
-          const confirmed=confirm(`Are you sure you want delete "${item.name}" ?`)
-          if(!confirmed) return ;
-          deleteItem(item.id);
-        });
+    // close update-item dialog
+    const closeItemUpdateModal = document.getElementById('close-update-item-btn');
+    closeItemUpdateModal.addEventListener('click', () =>
+      updateItemDialog.close()
+    );
+
+    editItemBtn.addEventListener('click', () => {
+      currentEditItemId = item.id;
+      document.getElementById('update-item-input').value = item.name;
+      updateItemDialog.showModal();
+    });
+
+    // Delete item
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '✕';
+    deleteBtn.className = 'item-delete-btn';
+
+    deleteBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const confirmed = confirm(
+        `Are you sure you want delete "${item.name}" ?`
+      );
+      if (!confirmed) return;
+      deleteItem(item.id);
+    });
 
     // Create todo in this item
-const todoDialog=document.getElementById('todo-dialog');
+    const todoDialog = document.getElementById('todo-dialog');
 
-//Close add-todo dialog
-const closeAddTodoDialog=document.getElementById('close-add-todo-btn');
-closeAddTodoDialog.addEventListener('click',()=>todoDialog.close());
-    addTodoBtn.addEventListener('click',()=>{
-      currentCreateTodoId=item.id;
-todoDialog.showModal();
+    // Close add-todo dialog
+    const closeAddTodoDialog = document.getElementById('close-add-todo-btn');
+    closeAddTodoDialog.addEventListener('click', () =>
+      todoDialog.close()
+    );
 
-    })
-  //appending section elements 
-   const headerLeft = document.createElement('div');
-headerLeft.className = 'section-header-left';
-headerLeft.append(title, meta);
+    //Todo Event listener :the code that should be placed in its on file(todoListener) is somehow here !
+    addTodoBtn.addEventListener('click', () => {
+      currentCreateTodoId = item.id;
+      todoDialog.showModal();
+    });
 
-const headerRight = document.createElement('div');
-headerRight.className = 'section-header-actions';
-headerRight.append(deleteBtn, editItemBtn, addTodoBtn);
+    // Appending section elements
+    const headerLeft = document.createElement('div');
+    headerLeft.className = 'section-header-left';
+    headerLeft.append(title, meta);
 
-header.append(headerLeft, headerRight);
+    const headerRight = document.createElement('div');
+    headerRight.className = 'section-header-actions';
+    headerRight.append(deleteBtn, editItemBtn, addTodoBtn);
 
-// Todo list container
+    header.append(headerLeft, headerRight);
+
+    // Todo list container
     const todoList = document.createElement('ul');
     todoList.className = 'todo-list';
 
@@ -151,41 +162,52 @@ header.append(headerLeft, headerRight);
 
 // Outside renderItems
 
-//Create todos form
-const todoForm=document.getElementById('todo-form');
-todoForm.addEventListener('submit',(e)=>{
+// Create todos form
+const todoForm = document.getElementById('todo-form');
+todoForm.addEventListener('submit', e => {
   e.preventDefault();
-  const todoTitle=document.getElementById('todo-title');
-  const todoPriority=document.getElementById('todo-priority');
-  const todoDueDate=document.getElementById('due-date');
-  const todoDesc=document.getElementById('todo-description');
-  createTodo(currentCreateTodoId,todoTitle.value,todoPriority.value,todoDueDate.value,todoDesc.value);
-  todoDesc.value='';
-  todoDueDate.value='';
-  todoPriority.value='';
-  todoTitle.value=''
-  document.getElementById('todo-dialog').close();
-   renderItems(getState()); 
-})
 
-//update item form listener 
-const updateItemForm=document.getElementById('update-item-form');
-const updateItemDialog=document.getElementById('update-item-dialog');
-updateItemForm.addEventListener('submit',(e)=>{
+  const todoTitle = document.getElementById('todo-title');
+  const todoPriority = document.getElementById('todo-priority');
+  const todoDueDate = document.getElementById('due-date');
+  const todoDesc = document.getElementById('todo-description');
+
+  createTodo(
+    currentCreateTodoId,
+    todoTitle.value,
+    todoPriority.value,
+    todoDueDate.value,
+    todoDesc.value
+  );
+
+  todoDesc.value = '';
+  todoDueDate.value = '';
+  todoPriority.value = '';
+  todoTitle.value = '';
+
+  document.getElementById('todo-dialog').close();
+  renderItems(getState());
+});
+
+// Update item form listener
+const updateItemForm = document.getElementById('update-item-form');
+const updateItemDialog = document.getElementById('update-item-dialog');
+
+updateItemForm.addEventListener('submit', e => {
   e.preventDefault();
-   const newItemName = document.getElementById('update-item-input').value;
+
+  const newItemName = document.getElementById('update-item-input').value;
   if (!currentEditItemId) return;
 
   updateItem(currentEditItemId, newItemName);
   updateItemDialog.close();
+});
 
-})
-
-//update project form listener
+// Update project form listener
 const updateForm = document.getElementById('update-form');
 const updateDialog = document.getElementById('update-dialog');
 
-updateForm.addEventListener('submit', (e) => {
+updateForm.addEventListener('submit', e => {
   e.preventDefault();
 
   const newName = document.getElementById('update-title').value;
@@ -196,14 +218,4 @@ updateForm.addEventListener('submit', (e) => {
 
   updateProject(currentEditProjectId, newName, newPriority, newDesc);
   updateDialog.close();
-});
-
-//Menu toggle 
-
-  const sidebar = document.querySelector('.sidebar');
-const menuBtn = document.getElementById('menu-btn');
-
-menuBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('open');
-   menuBtn.textContent = sidebar.classList.contains('open') ? '✕' : '☰';
 });

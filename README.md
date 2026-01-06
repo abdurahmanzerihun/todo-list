@@ -63,20 +63,16 @@ To run this project locally, follow these steps:
 
 ```bash
 1. Clone the repository
- 
   git clone https://github.com/abdurahmanzerihun/todo-list.git 
 2. Navigate to the project folder 
-   ```bash
    cd todo-list 
 3. Install dependencies
-   ```bash
    npm install 
 4. Start development server 
-   ```bash
    npm run start  
 5. Build for Production 
-   ```bash
    npm run build
+   ```
 
 ## Deployment (GitHub Pages)
  

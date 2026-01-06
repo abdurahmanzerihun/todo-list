@@ -61,9 +61,10 @@ todo-list/
 ## Installation
 To run this project locally, follow these steps:
 
+```bash
 1. Clone the repository
-  ```bash
-   git clone https://github.com/abdurahmanzerihun/todo-list.git 
+ 
+  git clone https://github.com/abdurahmanzerihun/todo-list.git 
 2. Navigate to the project folder 
    ```bash
    cd todo-list 

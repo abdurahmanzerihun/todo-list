@@ -1,4 +1,3 @@
-# todo-list
 # Todo List Application
 
 A simple and responsive Todo List app built using JavaScript and Webpack.
@@ -58,13 +57,13 @@ todo-list/
 │   ├── index.js
 │   ├── style.css
 └── webpack.config.js
-
+```
 ## Installation
 To run this project locally, follow these steps:
 
 1. Clone the repository
-   ```bash
-   git clone https://github.com/abdurahmanzerihun/todo-list.git
+  ```bash
+   git clone https://github.com/abdurahmanzerihun/todo-list.git 
 2. Navigate to the project folder 
    ```bash
    cd todo-list 
@@ -77,12 +76,13 @@ To run this project locally, follow these steps:
 5. Build for Production 
    ```bash
    npm run build
+
 ## Deployment (GitHub Pages)
  
 ```bash
 npm run build
 npm run deploy
-
+```
 ## Author
 **Abdurahman Z.**  
 Computer Science Student  

@@ -1,6 +1,6 @@
 # Todo List Application
 
-A simple and responsive Todo List app built using JavaScript and Webpack.
+A simple and responsive Todo List app built using JavaScript and Webpack at The Odin Project(TOP).
 
 ## Live Demo
 https://abdurahmanzerihun.githun.io/todo-list/

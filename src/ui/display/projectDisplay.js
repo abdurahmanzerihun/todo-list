@@ -79,11 +79,21 @@ export function renderActiveProject(state) {
 
 // Menu toggle
 const menuBtn = document.getElementById('menu-btn');
+const sidebar = document.querySelector('.sidebar');
 
-menuBtn.addEventListener('click', () => {
-  const sidebar = document.querySelector('.sidebar'); // fresh reference
-  if (!sidebar) return;
-
+menuBtn.addEventListener('click', (e) => {
+  e.stopPropagation(); // prevent document click
   sidebar.classList.toggle('open');
   menuBtn.textContent = sidebar.classList.contains('open') ? 'X' : '☰';
+});
+
+sidebar.addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+
+document.addEventListener('click', () => {
+  if (sidebar.classList.contains('open')) {
+    sidebar.classList.remove('open');
+    menuBtn.textContent = '☰';
+  }
 });
